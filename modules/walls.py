@@ -31,16 +31,39 @@ def get_coord_walls(rows, columns, widhts, longs, dim):
     
     '''
         El manejo de números aleatorios podría generar coordenadas que se exeden de las dimensiones
-        Esas coordenadas no se dibujarán, pero generan basura en la lista a entregar, de modo que se purgan a continuación
-        Para ir eliminando objetos una lista a medida que la voy leyendo, debo hacerlo en forma inversa, ello porque, en este caso,
+        Esas coordenadas no se dibujarán, pero generan basura en la lista a entregar, de modo que se purgan a continuación:
+        1. Para ir eliminando objetos una lista a medida que la voy leyendo, debo hacerlo en forma inversa, ello porque, en este caso,
         voy a ir eliminando elementos y al hacerlo, la longitud de la lista cambiaría.
+        2. También podrían haber duplicados; esos también se purgan
     '''
     # Limpiar listado
     for i in range((len(coord_walls)-1), -1, -1): 
-        if coord_walls[i][0] > dim or coord_walls[i][1] > dim:
+        if coord_walls[i][0] > dim or coord_walls[i][1] > dim or count_duplicate_list(coord_walls[i], coord_walls) > 1:
             coord_walls.pop(i)
-                
+               
     return coord_walls
+
+# Esta función depura coordenadas duplicadas
+def count_duplicate_list(item, elements_list):
+    '''
+    Paremeters:
+    ----------
+    item: list
+        Una lista para ser comparada
+    elements_list: list
+        Una lista con varias listas en su interior
+    ----------
+    Return
+    ----------
+    cont: int
+        El número de veces en los que una lista está en otra lista
+    '''
+    cont=0
+    for i in elements_list:
+        if i[0] == item[0] and i[1] == item[1]:
+            cont+=1
+    return cont
+
 
 # Función para construir mapas
 def construct_walls(coord_walls, dim):

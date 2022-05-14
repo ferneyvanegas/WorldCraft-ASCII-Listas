@@ -15,7 +15,7 @@ Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está
 
 ## **Definición del Problema (D)**
 ### ¿Qué información conozco se me ha suministrado?
-
+* El mundo se crea a través de valores aleaotorios
 * Deben presentarse 4 listas:
     * lista con número de ﬁlas
     * Lista con número de columnas,
@@ -26,6 +26,8 @@ Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está
 ![ejemplo](img/Ejemplo.jpg 'Ejemplo de ejercicio')
 
 ### ¿Qué información debo conocer?
+* La dimensión, es algo que es fijo (32x32) ó es algo que se solicita al usuario?
+    * La pregunta fue respondida en clase: La dimensión se debe solicitar
 * Manejo de expresiones (ariméticas, relacionales y lógicas) en Python
 * Manejo de Flujos secuenciales en Python
 * Manejo de Flujos condicionales en Python
@@ -64,30 +66,42 @@ Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está
 ## **Algoritmos (A)**
 
 ### Algoritmo: get_rows
-*Parámetros: Ninguno*
+*Parámetros: dim, pos*
 * Funcion rows <- get_rows ():
-    * rows = [azar(31),azar(31),azar(31),azar(31)]
+    * Dimensionar rows[]
+    * Para i<-0 Hasta pos con Paso 1 Hacer
+        * rows = rows + rows[azar(dim)]
+    * FinPara
     * Retorne rows
 * FinFuncion
 ***
 ### Algoritmo: get_columns
-*Parámetros: Ninguno*
+*Parámetros: dim, pos*
 * Funcion columns <- get_columns ():
-    * columns = [azar(31),azar(31),azar(31),azar(31)]
+    * Dimensionar columns[]
+    * Para i<-0 Hasta pos con Paso 1 Hacer
+        * columns = columns + columns[azar(dim)]
+    * FinPara
     * Retorne columns
 * FinFuncion
 ***
 ### Algoritmo: get_widths
-*Parámetros: Ninguno*
+*Parámetros: dim, pos*
 * Funcion widths <- get_widths ():
-    * widths = [azar(31),azar(31),azar(31),azar(31)]
+    * Dimensionar widths[]
+    * Para i<-0 Hasta pos con Paso 1 Hacer
+        * widths = widths + widths[azar(dim)]
+    * FinPara
     * Retorne widths
 * FinFuncion
 ***
 ### Algoritmo: get_longs
-*Parámetros: Ninguno*
+*Parámetros: dim, pos*
 * Funcion longs <- get_longs ():
-    * longs = [azar(31),azar(31),azar(31),azar(31)]
+    * Dimensionar longs[]
+    * Para i<-0 Hasta pos con Paso 1 Hacer
+        * longs = longs + longs[azar(dim)]
+    * FinPara
     * Retorne longs
 * FinFuncion
 ***
@@ -106,12 +120,24 @@ Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está
     * /*Limpiar las coordenadas que sobran*/
     * Longitud_coord_walls
     * Para i<-0 Hasta Longitud_coord_walls con Paso -1
-        * Si coord_walls[i][0] > dim or coord_walls[i][1] > dim Entonces
+        * Si coord_walls[i][0] > dim or coord_walls[i][1] > dim or Llamar contar(coord_walls[i]) > 1 Entonces
             /*Eliminar del array*/
             * Llamar eliminar(coord_walls[i])
         * FinSi
     * FinPara
     * Retorne coord_walls
+* FinFuncion
+***
+### Algoritmo: cont_duplicate_list
+*Parámetros: item, elements_list*
+* Funcion cont <- cont_duplicate_list()
+    * cont = 0
+    * tamaño_supuesto_elements_list=10
+    * Para i<-0 Hasta tamaño_supuesto_elements_list con Paso 1 Hacer:
+        * Si elements_list[i][0] == item[0] and elements_list[i][1] == item[1] Entonces
+            * cont = cont + 1
+        * FinSi
+    * FinPara
 * FinFuncion
 ***
 ### Algoritmo: construct_walls
@@ -144,10 +170,11 @@ Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está
 *Parámetros: Ninguno*
 * Funcion main ():
     * Leer dim /*Dimensiones del cuadrado. Un número*/
-    * Dimension rows = Llamar get_rows(dim)
-    * Dimension columns = Llamar get_columns(dim)
-    * Dimension widths = Llamar get_widths(dim)
-    * Dimension longs = Llamar get_longs(dim)
+    * Leer pos /*Cantidad de posiciones*/
+    * Dimension rows = Llamar get_rows(dim, pos)
+    * Dimension columns = Llamar get_columns(dim, pos)
+    * Dimension widths = Llamar get_widths(dim, pos)
+    * Dimension longs = Llamar get_longs(dim, pos)
     * Dimension walls = Llamar get_walls(rows, columns, widths, longs, dim)
     * Imprimir walls
     * Llamar construct_walls(walls, dim)
