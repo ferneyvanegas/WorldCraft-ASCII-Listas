@@ -1,7 +1,9 @@
 # WORLD CRAFT ASCII: Parte 2
-> Elaborado por: Ferney Vanegas Hernández
+Elaborado por: Ferney Vanegas Hernández
 
-> Misión Tic 2022
+Programa en Python cuyo objetivo principal es practicar listas. Su construcción es sumamente instructiva. Es parte de los ejercicios del programa con el Ministerio de Tecnologías de Comunicación de Colombia en el 2022. Inicialmente fue construido en la plataforma repli.it pero ahora (ya habíendo sido calificado), lo comparto con el mundo!
+
+Misión Tic 2022
 
 ## **Contexto**
 Una vez que un jugador ha sido registrado y aceptado en World Craft ASCII, está listo para ser asignado a un mundo
